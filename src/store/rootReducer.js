@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const slice = createSlice({
+const appSlice = createSlice({
     name: 'TodoAppRootReducer',
     initialState: {
-        id: 1,
+        id: 4,
         todos: []
     },
     reducers: {
@@ -16,7 +16,10 @@ const slice = createSlice({
         },
         changeToDo: (state, action) => {
             const item = state.todos.findIndex( (item) => item.id === action.payload.id);
-            
+
         }
     }
 })
+
+export default appSlice.reducer;
+export const { appTodo, changeToDo } = appSlice.actions;

@@ -1,4 +1,3 @@
-import { ConfigureStoreOptions } from "@reduxjs/toolkit";
 import { configureStore } from "@reduxjs/toolkit";
 import appReducer from './rootReducer'
 import AsyncStorage from "@react-native-async-storage/async-storage";
