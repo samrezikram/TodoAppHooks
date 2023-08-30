@@ -1,7 +1,4 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",
-  "exclude": [
-    "__tests__/**/*-test.ts"
-  ]
+    "extends": "@tsconfig/react-native/tsconfig.json",
+    "exclude": ["__tests__/**/*-test.ts"]
 }
-
