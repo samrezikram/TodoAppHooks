@@ -16,17 +16,19 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import { connect } from 'react-redux';
 
 import {
   Colors
 } from 'react-native/Libraries/NewAppScreen';
+import TaskItem from './TaskItem';
 
-
+import AddForm from './AddForm'
 
 const App = (props) => {
   const isDarkMode = useColorScheme() === 'dark';
-  const todoTasks = props.todos ?? [].filter((item) => item.state === 'todo');
-  const doneTasks = props.todos ?? [].filter((item) => (item.state === 'done'));
+  const todoTasks = props.todos.filter((item) => item.state === "todo");
+  const doneTasks = props.todos.filter((item) => item.state === "done");
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
@@ -36,7 +38,7 @@ const App = (props) => {
         {todoTasks.length !== 0 ? (
           <FlatList
             data={todoTasks}
-            renderItem={<Text>Samrez</Text>}
+            renderItem={(item ) => <TaskItem {...item}/>}
             keyExtractor={(item) => item.id}
           />
         ) :
@@ -49,15 +51,15 @@ const App = (props) => {
           <Text style={styles.listTitle}>Completed</Text>
           {doneTasks.length !== 0 ? (
             <FlatList
-            data={doneTasks}
-            renderItem={<Text>Ikram</Text>}
-            keyExtractor={(item) => item.id}
-            />
+              data={doneTasks}
+              renderItem={(item ) => <TaskItem {...item}/>}
+              keyExtractor={(item) => item.id}
+            />           
           ) : (
             <Text style={styles.emptyListText}>No completed tasks</Text>
           )}
         </View>
-
+        <AddForm />
     </SafeAreaView>
   );
 }
@@ -100,4 +102,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    todos: state.app.todos,
+  };
+}
+
+export default connect(mapStateToProps, null)(App)
