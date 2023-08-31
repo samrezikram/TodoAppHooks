@@ -30,7 +30,7 @@ const App = props => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="auto" />
-            <Text style={styles.pageTitle}>Inbox</Text>
+            <Text style={styles.pageTitle}>ADIB TASKs</Text>
             <View style={styles.listView}>
                 <Text style={styles.listTitle}>To Do</Text>
                 {todoTasks.length !== 0 ? (
