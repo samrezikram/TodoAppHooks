@@ -1,5 +1,4 @@
-import {useState} from 'react';
-
+import React, {useState}  from 'react';
 import {
     KeyboardAvoidingView,
     TextInput,
@@ -9,10 +8,9 @@ import {
     Text
 } from 'react-native';
 import {connect} from 'react-redux';
-import Icon from 'react-native-vector-icons/Feather';
 
+import Icon from 'react-native-vector-icons/Feather';
 import {appTodo} from '../store/rootReducer';
-import AddIcon from '../assets/addIcon.svg';
 
 const AddForm = props => {
     const [currentValue, setCurrentValue] = useState('');

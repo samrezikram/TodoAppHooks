@@ -14,13 +14,13 @@ import {
     StyleSheet,
     Text,
     useColorScheme,
-    View
+    View,
+    Platform
 } from 'react-native';
 import {connect} from 'react-redux';
-
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import TaskItem from './TaskItem';
 
+import TaskItem from './TaskItem';
 import AddForm from './AddForm';
 
 const App = props => {
@@ -29,7 +29,7 @@ const App = props => {
     const doneTasks = props.todos.filter(item => item.state === 'done');
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar style="auto" />
+            <StatusBar barStyle='default' />
             <Text style={styles.pageTitle}>ADIB TASKs</Text>
             <View style={styles.listView}>
                 <Text style={styles.listTitle}>To Do</Text>

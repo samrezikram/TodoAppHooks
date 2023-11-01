@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 
 import {changeTodo, trashTodo} from '../store/rootReducer';
-import {connect} from 'react-redux';
 
 const TaskItem = props => {
     const [isSelected, setSelection] = useState(false);

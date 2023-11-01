@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
-const createDebugger = require('redux-flipper').default; // <-- ADD THIS
+const createDebugger = require('redux-flipper').default;
 
 import appReducer from './rootReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
