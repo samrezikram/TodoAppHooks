@@ -74,14 +74,13 @@ const styles = StyleSheet.create({
         fontWeight: '600'
     },
     separator: {
-        marginHorizontal: 10,
-        marginTop: 25,
-        marginBottom: 10,
+        marginHorizontal: 12,
+        marginVertical: 12,
         borderBottomWidth: 1,
         borderBottomColor: 'rgba(0, 0, 0, 0.2)'
     },
     listTitle: {
-        marginBottom: 25,
+        marginBottom: 0,
         paddingHorizontal: 15,
         fontSize: 41,
         fontWeight: '500'
