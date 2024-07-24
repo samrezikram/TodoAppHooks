@@ -1,9 +1,9 @@
-import {configureStore} from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 const createDebugger = require('redux-flipper').default;
 
-import appReducer from './rootReducer';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistStore, persistReducer} from 'redux-persist';
+import { persistStore } from 'redux-persist';
+import appReducer from './rootReducer';
 
 const persistConfig = {
     key: 'root',
@@ -12,7 +12,7 @@ const persistConfig = {
 
 export const store = configureStore({
     reducer: {
-        app: persistReducer(persistConfig, appReducer)
+        app: appReducer
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

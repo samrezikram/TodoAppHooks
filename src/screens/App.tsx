@@ -8,20 +8,18 @@
 import React from 'react';
 import {
     FlatList,
+    Platform,
     SafeAreaView,
-    ScrollView,
     StatusBar,
     StyleSheet,
     Text,
-    useColorScheme,
     View,
-    Platform
+    useColorScheme,
 } from 'react-native';
-import {connect} from 'react-redux';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
+import { connect } from 'react-redux';
 
-import TaskItem from './TaskItem';
 import AddForm from './AddForm';
+import TaskItem from './TaskItem';
 
 const App = props => {
     const isDarkMode = useColorScheme() === 'dark';
@@ -30,7 +28,7 @@ const App = props => {
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar barStyle='default' />
-            <Text style={styles.pageTitle}>ADIB TASKs</Text>
+            <Text style={styles.pageTitle}>DU TASKs</Text>
             <View style={styles.listView}>
                 <Text style={styles.listTitle}>To Do</Text>
                 {todoTasks.length !== 0 ? (
@@ -65,28 +63,28 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
-        backgroundColor: '#f7f8fa'
+        backgroundColor: '#f7f8fa',
     },
     pageTitle: {
         marginBottom: 35,
         paddingHorizontal: 15,
         fontSize: 54,
-        fontWeight: '600'
+        fontWeight: '600',
     },
     separator: {
         marginHorizontal: 12,
         marginVertical: 12,
         borderBottomWidth: 1,
-        borderBottomColor: 'rgba(0, 0, 0, 0.2)'
+        borderBottomColor: 'rgba(0, 0, 0, 0.2)',
     },
     listTitle: {
         marginBottom: 0,
         paddingHorizontal: 15,
         fontSize: 41,
-        fontWeight: '500'
+        fontWeight: '500',
     },
     listView: {
-        flex: 1
+        flex: 1,
     },
     emptyListText: {
         paddingTop: 10,
@@ -94,14 +92,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         fontSize: 15,
         lineHeight: 20,
-        color: '#737373'
-    }
+        color: '#737373',
+    },
 });
 
 function mapStateToProps(state) {
     return {
-        todos: state.app.todos
+        todos: state.app.todos,
     };
 }
 
+// import StorybookUI from './../../.storybook';
+
+// export default StorybookUI
 export default connect(mapStateToProps, null)(App);

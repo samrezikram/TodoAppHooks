@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, TouchableOpacity, StyleSheet, Animated} from 'react-native';
 import {connect} from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
 
@@ -7,15 +7,41 @@ import {changeTodo, trashTodo} from '../store/rootReducer';
 
 const TaskItem = props => {
     const [isSelected, setSelection] = useState(false);
+    const animatedValue =  new Animated.Value(0);
+
+    useEffect(() => {
+        Animated.timing(animatedValue, {
+          toValue: isSelected ? 1 : 0,
+          duration: 200,
+          useNativeDriver: false,
+        }).start();
+      }, [isSelected]);
+
+    const handlePress = () => {
+        setSelection(!setSelection);
+    };
+
+    const scale = animatedValue.interpolate({
+        inputRange: [0, 1.0],
+        outputRange: [1.0, 1.2]
+      });
     return (
         <View style={styles.container}>
             <TouchableOpacity
                 style={styles.touchableContainer}
-                onPress={() => props.changeTodoState(props.item.id)}>
+                onPress={() => {
+                    props.changeTodoState(props.item.id);
+                    handlePress()
+                    }}>
                 {props.item.state === 'todo' ? (
                     <View
                         style={styles.itemContainer}>
-                        <CheckBox value={isSelected} onValueChange={setSelection} />
+                        <Animated.View style={{ transform: [{ scale }] }}>
+                            <CheckBox 
+                                value={isSelected} 
+                                onValueChange={setSelection} 
+                            />
+                        </Animated.View>
                         <Text style={styles.itemText}>{props.item.text}</Text>
                     </View>
                 ) : (
@@ -33,7 +59,7 @@ const TaskItem = props => {
                         style={[styles.itemContainer]}>
                         <CheckBox
                             style={{paddingHorizontal: 8, alignSelf: 'center'}}
-                            value={isSelected}
+                            value={true}
                             onValueChange={setSelection}
                         />
                         <Text style={[styles.itemText, styles.itemTextChecked]}>{props.item.text}</Text>
