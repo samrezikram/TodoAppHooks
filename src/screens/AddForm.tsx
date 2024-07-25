@@ -1,16 +1,15 @@
-import React, {useState}  from 'react';
+import React, { useState } from 'react';
 import {
     KeyboardAvoidingView,
-    TextInput,
-    Pressable,
     Platform,
+    Pressable,
     StyleSheet,
-    Text
+    Text,
+    TextInput,
 } from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import Icon from 'react-native-vector-icons/Feather';
-import {appTodo} from '../store/rootReducer';
+import { appTodo } from '../store/rootReducer';
 
 const AddForm = props => {
     const [currentValue, setCurrentValue] = useState('');
@@ -30,7 +29,7 @@ const AddForm = props => {
                 style={styles.inputField}
                 value={currentValue}
                 onChangeText={setCurrentValue}
-                placeholder="I want to..."
+                placeholder='I want to...'
                 onSubmitEditing={submitForm}
             />
 
@@ -47,7 +46,7 @@ export const styles = StyleSheet.create({
         marginTop: 'auto',
         marginBottom: 30,
         paddingHorizontal: 20,
-        backgroundColor: '#f7f8fa'
+        backgroundColor: '#f7f8fa',
     },
     inputField: {
         flex: 1,
@@ -57,7 +56,7 @@ export const styles = StyleSheet.create({
         borderBottomColor: 'rgba(0, 0, 0, 0.2)',
         color: '#000000',
         fontSize: 15,
-        textAlignVertical: 'center'
+        textAlignVertical: 'center',
     },
     addButton: {
         justifyContent: 'center',
@@ -71,14 +70,14 @@ export const styles = StyleSheet.create({
         shadowRadius: 8,
         shadowOffset: {
             width: 0,
-            height: 4
-        }
-    }
+            height: 4,
+        },
+    },
 });
 
 function mapDispatchToProps(dispatch) {
     return {
-        appTodo: text => dispatch(appTodo(text))
+        appTodo: text => dispatch(appTodo(text)),
     };
 }
 

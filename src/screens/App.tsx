@@ -98,11 +98,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
     return {
-        todos: state.app.todos,
+        todos: state?.rootReducer?.app?.todos || [],
     };
 }
 
-// import StorybookUI from './../../.storybook';
-
-// export default StorybookUI
 export default connect(mapStateToProps, null)(App);

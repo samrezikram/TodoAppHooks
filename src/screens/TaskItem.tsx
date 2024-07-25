@@ -1,21 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Animated} from 'react-native';
-import {connect} from 'react-redux';
 import CheckBox from '@react-native-community/checkbox';
+import React, { useEffect, useState } from 'react';
+import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { connect } from 'react-redux';
 
-import {changeTodo, trashTodo} from '../store/rootReducer';
+import { changeTodo, trashTodo } from '../store/rootReducer';
 
 const TaskItem = props => {
     const [isSelected, setSelection] = useState(false);
-    const animatedValue =  new Animated.Value(0);
+    const animatedValue = new Animated.Value(0);
 
     useEffect(() => {
         Animated.timing(animatedValue, {
-          toValue: isSelected ? 1 : 0,
-          duration: 200,
-          useNativeDriver: false,
+            toValue: isSelected ? 1 : 0,
+            duration: 200,
+            useNativeDriver: false,
         }).start();
-      }, [isSelected]);
+    }, [isSelected]);
 
     const handlePress = () => {
         setSelection(!setSelection);
@@ -23,24 +23,20 @@ const TaskItem = props => {
 
     const scale = animatedValue.interpolate({
         inputRange: [0, 1.0],
-        outputRange: [1.0, 1.2]
-      });
+        outputRange: [1.0, 1.2],
+    });
     return (
         <View style={styles.container}>
             <TouchableOpacity
                 style={styles.touchableContainer}
                 onPress={() => {
                     props.changeTodoState(props.item.id);
-                    handlePress()
-                    }}>
+                    handlePress();
+                }}>
                 {props.item.state === 'todo' ? (
-                    <View
-                        style={styles.itemContainer}>
+                    <View style={styles.itemContainer}>
                         <Animated.View style={{ transform: [{ scale }] }}>
-                            <CheckBox 
-                                value={isSelected} 
-                                onValueChange={setSelection} 
-                            />
+                            <CheckBox value={isSelected} onValueChange={setSelection} />
                         </Animated.View>
                         <Text style={styles.itemText}>{props.item.text}</Text>
                     </View>
@@ -51,18 +47,19 @@ const TaskItem = props => {
             <TouchableOpacity
                 style={[
                     styles.touchableContainer,
-                    props.item.state === 'done' && styles.trashButtonDone
+                    props.item.state === 'done' && styles.trashButtonDone,
                 ]}
                 onPress={() => props.trashTodo(props.item.id)}>
                 {props.item.state === 'done' ? (
-                    <View
-                        style={[styles.itemContainer]}>
+                    <View style={[styles.itemContainer]}>
                         <CheckBox
-                            style={{paddingHorizontal: 8, alignSelf: 'center'}}
+                            style={{ paddingHorizontal: 8, alignSelf: 'center' }}
                             value={true}
                             onValueChange={setSelection}
                         />
-                        <Text style={[styles.itemText, styles.itemTextChecked]}>{props.item.text}</Text>
+                        <Text style={[styles.itemText, styles.itemTextChecked]}>
+                            {props.item.text}
+                        </Text>
                     </View>
                 ) : (
                     <View />
@@ -78,7 +75,7 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingVertical: 12,
         paddingHorizontal: 12,
-        backgroundColor: '#f7f8fa'
+        backgroundColor: '#f7f8fa',
     },
     touchableContainer: {
         paddingHorizontal: 12,
@@ -89,21 +86,21 @@ export const styles = StyleSheet.create({
     },
     itemText: {
         paddingHorizontal: 8,
-        alignSelf: 'center'
+        alignSelf: 'center',
     },
     itemTextChecked: {
         opacity: 0.8,
-        textDecorationLine: 'line-through'
+        textDecorationLine: 'line-through',
     },
     trashButtonDone: {
-        opacity: 0.3
-    }
+        opacity: 0.3,
+    },
 });
 
 function mapDispatchToProps(dispatch) {
     return {
         changeTodoState: id => dispatch(changeTodo(id)),
-        trashTodo: id => dispatch(trashTodo(id))
+        trashTodo: id => dispatch(trashTodo(id)),
     };
 }
 
